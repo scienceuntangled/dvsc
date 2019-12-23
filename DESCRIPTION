@@ -1,0 +1,20 @@
+Package: dvsc
+Title: Create SC from DV
+Version: 0.0.1
+Authors@R: 
+    person(given = "Ben", family = "Raymond", role = c("aut", "cre"), email = "ben@untan.gl")
+Description: Create SC from DV.
+URL: https://github.com/scienceuntangled/dvsc
+BugReports: https://github.com/scienceuntangled/dvsc/issues
+License: TBD
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+Depends: datavolley
+Imports:
+    assertthat,
+    glue
+Suggests:
+    testthat
+Remotes: raymondben/datavolley
+RoxygenNote: 6.1.1

@@ -1,9 +1,9 @@
 Package: dvsc
-Title: Create SC from DV
+Title: Volleyball SportsCode XML Files
 Version: 0.0.1
 Authors@R: 
     person(given = "Ben", family = "Raymond", role = c("aut", "cre"), email = "ben@untan.gl")
-Description: Create SC from DV.
+Description: Create a SportsCode XML file from a DataVolley volleyball match file.
 URL: https://github.com/scienceuntangled/dvsc
 BugReports: https://github.com/scienceuntangled/dvsc/issues
 License: MIT + file LICENSE

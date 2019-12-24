@@ -91,10 +91,10 @@ dv2sc <- function(x, destfile = tempfile(fileext = ".xml"), home_team_short, vis
     rxml <- c("<ROWS>", vapply(seq_len(nrow(cx)), function(i) make_row_txt(cx[i, ]), FUN.VALUE = ""), "</ROWS>")
 
     ## put the whole thing together
-    sc <- c("<file><script/>", tag("SORT_INFO", tag("sort_type", "sort order")), ixml, rxml, "</file>\n")
+    sc <- c("<file><script/>", tag("SORT_INFO", tag("sort_type", "sort order")), ixml, rxml, "</file>")
     if (!is.null(destfile)) {
         ##cat(as.character(sc), file = destfile)
-        cat(sc, file = destfile, sep = "")
+        cat(c(sc, "\n"), file = destfile, sep = "")
         destfile
     } else {
         sc

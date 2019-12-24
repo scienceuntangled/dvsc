@@ -2,7 +2,9 @@
 
 export(dv2sc)
 export(read_dv)
+export(sc_preprocess)
 importFrom(assertthat,assert_that)
+importFrom(assertthat,is.flag)
 importFrom(assertthat,is.string)
 importFrom(datavolley,dv_example_file)
 importFrom(datavolley,read_dv)

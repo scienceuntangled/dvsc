@@ -1,10 +1,11 @@
-#' Create sc file from dvw file
+#' Create a SportsCode XML file from a DataVolley volleyball match file
 #'
 #' @param x datavolley or data.frame: a datavolley object as returned by [datavolley::read_dv()], or the plays component of that object
 #' @param destfile string: destination file name. If `NULL`, the function will return the raw XML rather than the filename
 #' @param home_team_short string: the short name to use for the home team. If missing or `NULL`, the `home_team_id` from `x` will be used
 #' @param visiting_team_short string: the short name to use for the visiting team. If missing or `NULL`, the `visiting_team_id` from `x` will be used
 #' @param rotation_style string: "international" or "USA". Using the USA style, rotation 1 is when the setter is in position 1 and rotation 2 is when they are in position 6. Using the international style, rotation 1 is when the setter is in position 1 and rotation 2 is when they are in position 2.
+#' @param preprocess string or function: the name of a function, or the function itself, that should be applied to the `x` prior to creating the Sportscode file. The `preprocess` function should take a single argument `x` and return a modified copy of that object
 #' @return The path to the created XML file, or if `destfile` was `NULL`, the XML itself as a character vector.
 #' @seealso [datavolley::read_dv()]
 #'
@@ -13,13 +14,22 @@
 #' sx <- dv2sc(x)
 #'
 #' @export
-dv2sc <- function(x, destfile = tempfile(fileext = ".xml"), home_team_short, visiting_team_short, rotation_style = "international") {
+dv2sc <- function(x, destfile = tempfile(fileext = ".xml"), home_team_short, visiting_team_short, rotation_style = "international", preprocess = "sc_preprocess") {
     if (!is.null(destfile)) {
         assert_that(is.string(destfile))
     }
-    if (inherits(x, "datavolley") || (is.list(x) && "plays" %in% names(x))) {
-        x <- datavolley::plays(x)
+    if (!(inherits(x, "datavolley") || (is.list(x) && "plays" %in% names(x)))) {
+        stop("x should be a datavolley object or equivalent")
     }
+    if (is.string(preprocess)) preprocess <- match.fun(preprocess)
+    if (!is.null(preprocess)) {
+        assert_that(is.function(preprocess))
+        x <- preprocess(x)
+        if (!(inherits(x, "datavolley") || (is.list(x) && "plays" %in% names(x)))) {
+            stop("the `preprocess` function should return a datavolley object or equivalent")
+        }
+    }
+    x <- datavolley::plays(x)
     if (missing(home_team_short) || is.null(home_team_short)) {
         home_team_short <- first_nonNA(x$home_team_id)
     } else {

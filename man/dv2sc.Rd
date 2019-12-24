@@ -2,10 +2,11 @@
 % Please edit documentation in R/dv2sc.R
 \name{dv2sc}
 \alias{dv2sc}
-\title{Create sc file from dvw file}
+\title{Create a SportsCode XML file from a DataVolley volleyball match file}
 \usage{
 dv2sc(x, destfile = tempfile(fileext = ".xml"), home_team_short,
-  visiting_team_short, rotation_style = "international")
+  visiting_team_short, rotation_style = "international",
+  preprocess = "sc_preprocess")
 }
 \arguments{
 \item{x}{datavolley or data.frame: a datavolley object as returned by \code{\link[datavolley:read_dv]{datavolley::read_dv()}}, or the plays component of that object}
@@ -17,12 +18,14 @@ dv2sc(x, destfile = tempfile(fileext = ".xml"), home_team_short,
 \item{visiting_team_short}{string: the short name to use for the visiting team. If missing or \code{NULL}, the \code{visiting_team_id} from \code{x} will be used}
 
 \item{rotation_style}{string: "international" or "USA". Using the USA style, rotation 1 is when the setter is in position 1 and rotation 2 is when they are in position 6. Using the international style, rotation 1 is when the setter is in position 1 and rotation 2 is when they are in position 2.}
+
+\item{preprocess}{string or function: the name of a function, or the function itself, that should be applied to the \code{x} prior to creating the Sportscode file. The \code{preprocess} function should take a single argument \code{x} and return a modified copy of that object}
 }
 \value{
 The path to the created XML file, or if \code{destfile} was \code{NULL}, the XML itself as a character vector.
 }
 \description{
-Create sc file from dvw file
+Create a SportsCode XML file from a DataVolley volleyball match file
 }
 \examples{
 x <- read_dv(dv_example_file())

@@ -6,5 +6,5 @@
 \alias{dvsc-package}
 \title{\pkg{dvsc}}
 \description{
-Description here.
+Create a SportsCode XML file from a DataVolley volleyball match file.
 }

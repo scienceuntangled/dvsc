@@ -5,6 +5,8 @@
 
 <!-- badges: start -->
 
+[![Travis build
+status](https://travis-ci.org/scienceuntangled/dvsc.svg?branch=master)](https://travis-ci.org/scienceuntangled/dvsc)
 <!-- badges: end -->
 
 ## Installation

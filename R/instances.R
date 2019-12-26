@@ -56,13 +56,12 @@ make_instance_txt <- function(type, rx, inst = NULL, instance_id, start_end) {
         ## rx should be single row now
         this_inst <- instance_add_common_txt(inst = inst, rxi = rx)
         ## then specific to action
-        if (rx$skill %in% c("Serve", "Reception", "Attack", "Block", "Set", "Dig")) {
+        if (rx$skill %in% c("Serve", "Reception", "Attack", "Block", "Set", "Dig", "Cover")) {
             inst <- instance_add_action_txt(this_inst, rxi = rx, rx$skill)
         } else {
             ## not handled (yet)
             inst <- NULL
         }
-        ## dig following block is cover
 
 ## "Ball Over" "Cover" "Save" "Substitution"
 ## "Defense First Ball" "Defense Transition" "Downball"
@@ -147,7 +146,7 @@ instance_add_common_txt <- function(inst, rxi) {
 instance_add_action_txt <- function(inst, rxi, type) {
     ## rxi is a single row
     inst <- instance_add_common_txt(inst = inst, rxi = rxi)
-    if (tolower(type) %in% c("serve", "set", "attack", "block", "dig")) {
+    if (tolower(type) %in% c("serve", "set", "attack", "block", "dig", "cover")) {
         inst <- c(inst, tag("code", paste0(rxi$team_id, " ", type)))
     } else if (tolower(type) == "reception") {
         inst <- c(inst, tag("code", paste0(rxi$team_id, " Receive")))
